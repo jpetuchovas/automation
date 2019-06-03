@@ -1,0 +1,8 @@
+---
+anaconda_version: 2019.03
+anaconda_download_directory_path: /tmp
+anaconda_installer_name: >-
+  Anaconda3-{{ anaconda_version }}-{{ ansible_system }}-{{ ansible_architecture }}.sh
+anaconda_download_url: >-
+  https://repo.anaconda.com/archive/{{ anaconda_installer_name }}
+anaconda_installation_directory: ~/anaconda3

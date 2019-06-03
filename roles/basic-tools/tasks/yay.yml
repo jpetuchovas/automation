@@ -1,0 +1,17 @@
+---
+- name: Clone Yay repository to {{ yay.dest }}
+  git:
+    repo: '{{ yay.repo }}'
+    dest: '{{ yay.dest }}'
+    force: true
+
+- name: Install Yay dependencies
+  become: true
+  pacman:
+    name: go
+    state: present
+
+- name: Build Yay
+  command: makepkg --install --noconfirm
+  args:
+    chdir: '{{ yay.dest }}'

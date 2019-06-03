@@ -1,0 +1,4 @@
+---
+- name: Install Visual Studio Code
+  aur:
+    name: visual-studio-code-bin

@@ -1,0 +1,27 @@
+---
+- name: Download Dropbox public key to {{ dropbox_public_key.dest }}
+  get_url:
+    url: '{{ dropbox_public_key.url }}'
+    dest: '{{ dropbox_public_key.dest }}'
+
+- name: Add Dropbox GPG key
+  command: gpg --import {{ dropbox_public_key.dest }}
+
+- name: Install Dropbox
+  aur:
+    name: dropbox
+
+- name: Delete Dropbox public key from {{ dropbox_public_key.dest }}
+  file:
+    path: '{{ dropbox_public_key.dest }}'
+    state: absent
+
+- name: Copy configuration file for Dropbox
+  become: true
+  copy:
+    src: files/sysctl.conf
+    dest: '{{ dropbox_configuration_path }}'
+
+- name: Pick up Dropbox configuration changes
+  become: true
+  command: sysctl --load

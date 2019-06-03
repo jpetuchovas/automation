@@ -1,0 +1,13 @@
+---
+- name: Install packages using pacman
+  become: true
+  pacman:
+    name: docker
+    state: present
+
+- name: Install packages from AUR
+  aur:
+    name: direnv
+
+- name: Install Anaconda
+  import_tasks: anaconda.yml

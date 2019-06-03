@@ -1,0 +1,6 @@
+---
+dropbox_public_key:
+  url: https://linux.dropbox.com/fedora/rpm-public-key.asc
+  dest: /tmp/rpm-public-key.asc
+
+dropbox_configuration_path: /etc/sysctl.conf

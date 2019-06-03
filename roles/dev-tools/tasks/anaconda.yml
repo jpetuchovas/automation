@@ -1,0 +1,52 @@
+---
+- name: Check if Anaconda is installed
+  stat:
+    path: '{{ anaconda_installation_directory }}/bin/conda'
+  changed_when: false
+  register: anaconda_conda_binary
+
+- name: Install Anaconda
+  block:
+    - name: Install Anaconda extended dependencies
+      become: true
+      pacman:
+        name:
+          - libxau
+          - libxi
+          - libxss
+          - libxtst
+          - libxcursor
+          - libxcomposite
+          - libxdamage
+          - libxfixes
+          - libxrandr
+          - libxrender
+          - mesa-libgl
+          - alsa-lib
+          - libglvnd
+        state: present
+
+    - name: Download Anaconda installer
+      get_url:
+        url: '{{ anaconda_download_url }}'
+        dest: '{{ anaconda_download_directory_path }}/{{ anaconda_installer_name }}'
+        owner: '{{ user_name }}'
+        group: '{{ user_name }}'
+        timeout: 600
+        mode: 0700
+
+    - name: Run Anaconda installer
+      shell: >-
+        bash {{ anaconda_download_directory_path }}/{{ anaconda_installer_name }}
+        -b -p {{ anaconda_installation_directory }}
+
+    - name: Delete Anaconda installer
+      file:
+        path: '{{ anaconda_download_directory_path }}/{{ anaconda_installer_name }}'
+        state: absent
+
+    - name: Install conda’s shell functions
+      shell: >-
+        eval "$({{ anaconda_installation_directory }}/bin/conda shell.bash hook)" &&
+        conda init
+  when: not anaconda_conda_binary.stat.exists

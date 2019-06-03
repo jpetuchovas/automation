@@ -1,0 +1,6 @@
+---
+- name: Install Anki
+  become: true
+  pacman:
+    name: anki
+    state: present

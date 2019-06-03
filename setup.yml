@@ -1,0 +1,34 @@
+---
+- hosts: local
+  roles:
+    - role: basic-tools
+      tags: basic-tools
+    - role: editors
+      tags: editors
+    - role: storage
+      tags: storage
+    - role: dev-tools
+      tags: dev-tools
+    - role: learning
+      tags: learning
+
+  #tasks:
+    # - import_tasks: tasks/users.yml
+    # - import_tasks: tasks/cron.yml
+    #- import_tasks: tasks/basic-tools.yml
+    # - import_tasks: tasks/node.yml
+    # - import_tasks: tasks/anaconda.yml
+    # - import_tasks: tasks/virtualization.yml
+    #   when: ansible_virtualization_role == 'host'
+    # - import_tasks: tasks/spaced-repetition.yml
+    # - import_tasks: tasks/station.yml
+    # - import_tasks: tasks/default-applications.yml
+    # - import_tasks: tasks/gnome.yml
+    # - import_tasks: tasks/locale.yml
+    # - import_tasks: tasks/microphone.yml
+    #   when: ansible_virtualization_role == 'host'
+    # - import_tasks: tasks/wallpaper.yml
+    # - import_tasks: tasks/dotfiles.yml
+    # - import_tasks: tasks/spark.yml
+    # - import_tasks: tasks/removal.yml
+    # - import_tasks: tasks/peripherals.yml

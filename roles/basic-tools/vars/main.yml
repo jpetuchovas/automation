@@ -1,0 +1,4 @@
+---
+yay:
+  repo: https://aur.archlinux.org/yay.git
+  dest: ~/programs/yay
